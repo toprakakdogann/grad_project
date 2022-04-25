@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grad_project/components/bottomNavBar.dart';
+import 'package:grad_project/list_rest.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -12,64 +14,82 @@ class _HomePageState extends State<HomePage> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ListView(
-                children:[
-                  //home başlığı
-                  buildBaslik(),
-                  //banner
-                  buildBanner(),
-                  const SizedBox(height: 24),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: const Color(0xFF535353),
-                    ),
-                    child: const Text(
-                      "Restaurantları Listele",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600
+        child: Stack(
+          children: [
+            Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: ListView(
+                    children:[
+                      //home başlığı
+                      buildBaslik(),
+                      //banner
+                      buildBanner(),
+                      const SizedBox(height: 24),
+                      GestureDetector(
+                        onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (Context) => restList()),
+                        ),
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: const Color(0xFF535353),
+                          ),
+                          child: const Text(
+                            "Restaurantları Listele",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top:24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            buildNavigation(text: "İndirimler", icon: Icons.percent),
+                            buildNavigation(text: "Fit Yemek", icon: Icons.fitness_center),
+                            buildNavigation(text: "Öğrencilere", icon: Icons.menu_book),
+                            buildNavigation(text: "Popüler", icon: Icons.favorite),
+                          ],
+                        ),
                       ),
 
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top:24),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        buildNavigation(text: "İndirimler", icon: Icons.percent),
-                        buildNavigation(text: "Fit Yemek", icon: Icons.fitness_center),
-                        buildNavigation(text: "Öğrencilere", icon: Icons.menu_book),
-                        buildNavigation(text: "Popüler", icon: Icons.favorite),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-                  const Text("İndirimli Restaurantlar",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: Color(0xFF000000),
-                      )),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildSalesItem(text: "Burger King", photoUrl: "assets/images/bk.png", discount: '%30',screenWidth: screenWidth,),
-                      buildSalesItem(text: "KFC", photoUrl: "assets/images/KFC_logo.png", discount: '%20',screenWidth: screenWidth,),
+                      const SizedBox(height: 24),
+                      const Text("İndirimli Restaurantlar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: Color(0xFF000000),
+                          )),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          buildSalesItem(text: "Burger King", photoUrl: "assets/images/bk.png", discount: '%30',screenWidth: screenWidth,),
+                          buildSalesItem(text: "KFC", photoUrl: "assets/images/KFC_logo.png", discount: '%20',screenWidth: screenWidth,),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          buildSalesItem(text: "MC Donald's", photoUrl: "assets/images/McDonald's_logo.png", discount: '%10',screenWidth: screenWidth,),
+                          buildSalesItem(text: "Usta Dönerci", photoUrl: "assets/images/ud-logo.png", discount: '%50',screenWidth: screenWidth,),
+                        ],
+                      ),
+                      const SizedBox(height: 50),
                     ],
-                  )
-                ],
-              ),
-            ),
+                  ),
+                ),
+
+            bottomNavBar(),
+
+          ],
+        ),
         ),
       );
   }
@@ -88,6 +108,7 @@ Widget buildBaslik() {
     ),
   );
 }
+
 Widget buildBanner() {
   return Padding(
       padding: const EdgeInsets.only(top: 24),
@@ -177,7 +198,7 @@ Widget buildSalesItem({
     padding:
     EdgeInsets.only(left:12, top: 12, bottom: 21, right: 12),
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           padding: EdgeInsets.all(4),
@@ -186,20 +207,21 @@ Widget buildSalesItem({
               color: Color(0xFFE0ECF8)),
           child: Text(
             discount,
-            style: const TextStyle(
-              color: Color(0xFF000000),
-              fontSize: 15,
+              style: const TextStyle(
+                color: Color(0xFF000000),
+                fontSize: 15,
+              ),
             ),
-          ),
         ),
         const SizedBox(height: 22),
-        Image.asset(photoUrl, width: 120, height: 120,),
-        const SizedBox(height: 22),
+        Center(child: Image.asset(photoUrl, width: 120, height: 120,)),
+        const SizedBox(height: 10),
         Center(
           child: Text(text,
               style: const TextStyle(
                   fontSize: 18,
                   color: Color(0xFF000000))),
+
         ),
       ],
     ),
