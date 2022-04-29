@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
                       buildBanner(),
                       const SizedBox(height: 24),
                       GestureDetector(
-                        onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (Context) => restList()),
+                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (Context) => restList()),
                         ),
                         child: Container(
                           width: double.infinity,
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-            bottomNavBar(),
+            bottomNavBar("home"),
 
           ],
         ),

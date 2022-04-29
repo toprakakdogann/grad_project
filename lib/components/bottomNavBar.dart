@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget bottomNavBar(){
+Widget bottomNavBar(String page){
   return Align(
     alignment: Alignment.bottomCenter,
     child: Container(
@@ -19,11 +19,11 @@ Widget bottomNavBar(){
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          buildNavIcon(iconData: Icons.home, active: true),
-          buildNavIcon(iconData: Icons.search, active: false),
-          buildNavIcon(iconData: Icons.shopping_basket, active: false),
-          buildNavIcon(iconData: Icons.message, active: false),
-          buildNavIcon(iconData: Icons.person, active: false),
+          buildNavIcon(iconData: Icons.home, active: page == "home"),
+          buildNavIcon(iconData: Icons.search, active: page == "search"),
+          buildNavIcon(iconData: Icons.shopping_basket, active: page == "basket"),
+          buildNavIcon(iconData: Icons.message, active: page == "message"),
+          buildNavIcon(iconData: Icons.person, active: page == "profile"),
 
         ],
       ),

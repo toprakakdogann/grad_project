@@ -7,7 +7,7 @@ Widget header(String title, context) {
       SizedBox(height: 29),
       GestureDetector(
         onTap: (){
-          Navigator.pop(context);
+          Navigator.of(context).pop();
         },
         child: const Icon(
             Icons.arrow_back_ios,
