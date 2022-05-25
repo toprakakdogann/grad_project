@@ -8,37 +8,42 @@ class restaurant extends StatelessWidget {
   List<Map> products = [
     {
       "isim": "Double Zinger Burger",
-      "fotograf": "assets/images/doublezinger.jpeg",
+      "fotograf": "assets/images/last.png",
       "fiyat": "49.99"
     },
     {
       "isim": "Double Zinger Burger",
-      "fotograf": "assets/images/doublezinger.jpeg",
+      "fotograf": "assets/images/last.png",
       "fiyat": "49.99"
     },
     {
       "isim": "Double Zinger Burger",
-      "fotograf": "assets/images/doublezinger.jpeg",
+      "fotograf": "assets/images/last.png",
       "fiyat": "49.99"
     },
     {
       "isim": "Double Zinger Burger",
-      "fotograf": "assets/images/doublezinger.jpeg",
+      "fotograf": "assets/images/last.png",
       "fiyat": "49.99"
     },
     {
       "isim": "Double Zinger Burger",
-      "fotograf": "assets/images/doublezinger.jpeg",
+      "fotograf": "assets/images/last.png",
       "fiyat": "49.99"
     },
     {
       "isim": "Double Zinger Burger",
-      "fotograf": "assets/images/doublezinger.jpeg",
+      "fotograf": "assets/images/last.png",
       "fiyat": "49.99"
     },
     {
       "isim": "Double Zinger Burger",
-      "fotograf": "assets/images/doublezinger.jpeg",
+      "fotograf": "assets/images/last.png",
+      "fiyat": "49.99"
+    },
+    {
+      "isim": "Double Zinger Burger",
+      "fotograf": "assets/images/last.png",
       "fiyat": "49.99"
     },
 
@@ -63,14 +68,17 @@ class restaurant extends StatelessWidget {
                       Expanded(
                         child: GridView.count(
                           crossAxisCount: 2,
-                          mainAxisSpacing: 15,
+                          mainAxisSpacing: 10,
                           crossAxisSpacing: 10,
-                          children: products.map((Map product) {
+                          children:  products.map<Widget>((product) {
                             return buildContent(
                                 product ["isim"], product ["fotograf"], product ["fiyat"]);
-                          }).toList(),
+                          }).toList() as List<Widget>,
                         ),
-                      )
+
+                      ),
+                      SizedBox(height: 60),
+
                     ]),
               ),
 
@@ -79,7 +87,7 @@ class restaurant extends StatelessWidget {
   }
 }
 
-buildContent(String title, String photoUrl, String price) {
+  buildContent(String title, String photoUrl, String price) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
     decoration: BoxDecoration(
@@ -94,9 +102,8 @@ buildContent(String title, String photoUrl, String price) {
     ),
     child: Column(
       children: [
-        SizedBox(height: 16),
         Image.asset(photoUrl),
-        SizedBox(height: 42),
+        SizedBox(height: 6),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -112,10 +119,13 @@ buildContent(String title, String photoUrl, String price) {
                   color: Color(0xFF0001FC),
                   fontSize: 12,
                   fontWeight: FontWeight.w500),),
+
           ],
-        )
+        ),
+
       ],
     ),
   );
+
 
 }
