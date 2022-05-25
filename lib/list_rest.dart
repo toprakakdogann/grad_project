@@ -37,6 +37,7 @@ class restList extends StatelessWidget {
               .toList()),
       ),
 
+      SizedBox(height: 36),
       ],
     ),
     ),
@@ -50,7 +51,7 @@ class restList extends StatelessWidget {
 Widget buildRest(String title, context){
   return GestureDetector(
     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (Context) {
-      return restaurant();
+      return restaurant(title);
   })
     ),
     child: Container(
